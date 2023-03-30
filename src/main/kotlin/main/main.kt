@@ -1,24 +1,24 @@
 package main
 
+import dataClases.Satellite
+import dataClases.SatelliteList
 import kotlin.math.pow
 
 fun main() {
 
+	val kenobi = Satellite("Kenobi", 150.0, listOf("", "este", "es", "un", "mensaje"))
+	val skywalker = Satellite("Skywalker", 238.0, listOf("Hola", "este", "", "un", ""))
+	val sato = Satellite("Sato", 176.0, listOf("", "", "es", "un", "mensaje"))
+	val listSatellite = SatelliteList(listOf(kenobi,skywalker,sato))
 	println("Bienvenido!!! Hemos detectado una nave imperial que está a la deriva en un campo de asteroides..")
-	val distancias = arrayOf(150f, 238f, 176f)
-	val position = getLocation(distancias)
-	if (position != null) {
+	val position = getLocation(listSatellite.satellites)
+	if (position != Pair(null, null)) {
 		println("La posición de la nave enemiga es x: ${position.first}, y: ${position.second}")
 	} else {
 		println("No pudimos obtener la posición dado que nos faltó un dato de distancia.")
 	}
 	println("También hemos podido reconstruir el contenido del mensaje transmitido por la nave imperial:")
-	val mensajesEncriptados: List<List<String>> = listOf(
-		listOf("", "este", "es", "un", "mensaje"),
-		listOf("Hola", "este", "", "un", ""),
-		listOf("", "", "es", "un", "mensaje")
-	)
-	val mensaje = getMessege(mensajesEncriptados)
+	val mensaje = getMessege(listSatellite.satellites)
 	println("El contendido del mensaje es: '$mensaje'.")
 	println("Con esta información podrás provocarle un duro golpe al Imperio Galactico")
 }
@@ -30,28 +30,34 @@ fun main() {
 // https://www.figma.com/file/XUbwl0hIkeKKW8CoYC2YG4/Trilateraci%C3%B3n---Meli-Challenge?node-id=0%3A1&t=AWzd88m2NioecRe7-1
 
 // Función que recibe las distancias a los tres satélites y devuelve las coordenadas del emisor del mensaje
-fun getLocation(distancias: Array<Float>): Pair<Float, Float>? {
+fun getLocation(listaSatelites: List<Satellite>): Pair<Double?, Double?> {
 
 	// Coordenadas conocidas de los tres satélites
-	val coordenadasKenobi = Pair(-500f, -200f)
-	val coordenadasSkywalker = Pair(100f, -100f)
-	val coordenadasSato = Pair(500f, 100f)
+	val coordenadasKenobi = Pair(-500.0, -200.0)
+	val coordenadasSkywalker = Pair(100.0, -100.0)
+	val coordenadasSato = Pair(500.0, 100.0)
 
 	// Se valida que se reciban las tres distancias. Caso contrario no posible triangular y devolvemos null
-	if (distancias.size != 3) {
-		return null
+	if (listaSatelites.size != 3) {
+		return Pair(null, null)
+	}
+
+	listaSatelites.forEach {
+		if (it.distance == null) {
+			return Pair(null, null)
+		}
 	}
 
 	// Distancia a cada satélite desde la fuente del mensaje. La suposición acá es que vienen en el orden propuesto
 	// abajo. Que es el mismo orden en que acomodé las coordenadas del satelite arriba. (kenobi, skywalker, sato)
-	val distanciaKenobi = distancias[0]
-	val distanciaSkywalker = distancias[1]
-	val distanciaSato = distancias[2]
+	val distanciaKenobi = listaSatelites[0].distance
+	val distanciaSkywalker = listaSatelites[1].distance
+	val distanciaSato = listaSatelites[2].distance
 
 	// Se calcula la distancia al cuadrado entre cada satélite y la fuente del mensaje
-	val d1Sq = distanciaKenobi.pow(2)
-	val d2Sq = distanciaSkywalker.pow(2)
-	val d3Sq = distanciaSato.pow(2)
+	val d1Sq = distanciaKenobi!!.pow(2)
+	val d2Sq = distanciaSkywalker!!.pow(2)
+	val d3Sq = distanciaSato!!.pow(2)
 
 	// Se obtienen las coordenadas de cada satélite.
 	val x1 = coordenadasKenobi.first
@@ -86,25 +92,19 @@ fun getLocation(distancias: Array<Float>): Pair<Float, Float>? {
 }
 
 
-fun getMessege(messeges : List<List<String>>) : String {
+fun getMessege(listaSatelites: List<Satellite>) : String {
 
 	// Misma suposición que en getLocation(). Los mensajes ingresan ordenados [0] = Kenobi, [1] = Skywalker, [2] = Sato
-	val mensajeKenobi = messeges[0]
-	val mensajeSkywalker = messeges[1]
-	val mensajeSato = messeges[2]
-
-	/* Ejemplo
-    Kenobi: [ "", "este", "es", "un", "mensaje"]
-    Skywalker: [ "Hola", "este", "", "un", "mensaje"]
-    Sato: [ "", "", "es", "", "mensaje"]
-     */
+	val mensajeKenobi = listaSatelites[0].message
+	val mensajeSkywalker = listaSatelites[1].message
+	val mensajeSato = listaSatelites[2].message
 
 	val mensajeCompletoList  = mutableListOf<String>()
 	var largoMensajeCompletoList = 0
 
-	messeges.forEach {
-		if (it.size > largoMensajeCompletoList) {
-			largoMensajeCompletoList = it.size
+	listaSatelites.forEach {
+		if (it.message.size > largoMensajeCompletoList) {
+			largoMensajeCompletoList = it.message.size
 		}
 	}
 

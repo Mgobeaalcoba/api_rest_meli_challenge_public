@@ -1,5 +1,5 @@
 package dataClases
 
-data class TopSecretRequest(
+data class SatelliteList(
     val satellites: List<Satellite>
 )
