@@ -150,7 +150,7 @@ curl --location 'http://35.202.30.49:8080/topsecret_split/sato'
 
 Podes obtener estas request y otras tres para probar los endpoints (que forman parte de la misma colection) en http://localhost:8080 importando el siguiente link en Postman: 
 
-https://api.postman.com/collections/22590678-6ae76ace-8d70-4d5e-a530-0ec629969160?access_key=PMAT-01GWT36P9451VQPF7JWA8A8Z67
+https://XXXXXX.XXX/XXXXX/XXXXXXXX
 
 Importante: para probarlo en local host primero vas a tener que clonar el repositorio actual en tu PC
 
