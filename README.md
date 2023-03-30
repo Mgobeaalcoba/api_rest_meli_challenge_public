@@ -4,7 +4,7 @@ Este proyecto es una API REST construida con Spring Boot en el lenguaje de progr
 
 ## Cómo usar
 
-El proyecto contiene un controlador TopSecretController que maneja las solicitudes para determinar la ubicación de la nave y obtener el mensaje secreto. La aplicación está hosteada en http://35.202.30.49:8080 y el servidor se encuentra encendido de forma permanente por lo que se le puede pegar a cualquier de sus inputs cuando así lo necesiten. 
+El proyecto contiene un controlador TopSecretController que maneja las solicitudes para determinar la ubicación de la nave y obtener el mensaje secreto. La aplicación está hosteada en http://35.202.30.49:8080 y el servidor se encuentra encendido de forma permanente por lo que se le puede pegar a cualquiera de sus endpoints en cualquier momento. 
 
 ## Endpoints
 
