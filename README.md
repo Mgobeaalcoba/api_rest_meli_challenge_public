@@ -158,7 +158,7 @@ Importante: para probarlo en local host primero vas a tener que clonar el reposi
 https://github.com/Mgobeaalcoba/api_rest_meli_challenge_public.git
 ```
 
-luego compilarlo ubicarte en el directorio donde lo clonaste y compilarlo con el siguiente comando: 
+luego ubicarte en el directorio clonado y compilarlo con el siguiente comando: 
 
 ```bash
 ./gradlew build
