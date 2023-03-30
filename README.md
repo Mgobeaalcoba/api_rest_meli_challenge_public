@@ -146,6 +146,32 @@ curl --location 'http://35.202.30.49:8080/topsecret_split/keno' \
 curl --location 'http://35.202.30.49:8080/topsecret_split/sato'
 ```
 
+Podes obtener estas request y otras tres para probar los endpoints en http://localhost:8080 importando el siguiente link en Postman: 
+
+https://api.postman.com/collections/22590678-6ae76ace-8d70-4d5e-a530-0ec629969160?access_key=PMAT-01GWT36P9451VQPF7JWA8A8Z67
+
+Importante: para probarlo en local host primero vas a tener que clonar el repositorio actual en tu PC
+
+```bash
+https://github.com/Mgobeaalcoba/api_rest_meli_challenge_public.git
+```
+
+luego compilarlo ubicarte en el directorio donde lo clonaste y compilarlo con el siguiente comando: 
+
+```bash
+./gradlew build
+```
+
+Una vez compilado, se debe ejecutar el archivo .jar generado por la compilación con el siguiente comando: 
+
+```bash
+java -jar build/libs/{mi-programa}.jar
+```
+
+Hay que reemplazar {mi-programa} por el nombre que el compilador le haya puesto en tu PC. 
+
+Hecho esto tendrás el servidor levantado en localhost y podrás probarlo también allí. 
+
 ## Autor
 
 Data Dev | Web & App Dev | Sociologist
