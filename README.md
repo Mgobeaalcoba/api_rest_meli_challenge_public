@@ -97,6 +97,10 @@ El método postSplitSatellite() de la clase TopSecretController registra la dist
 
 El método getSplitSatellite() de la clase TopSecretController devuelve la ubicación y el fragmento del mensaje secreto de un satélite específico. Si el satélite no está registrado, devuelve un mensaje de error. Si no se proporcionan suficientes fragmentos de mensaje, devuelve un mensaje de error.
 
+## Otras consideraciones: 
+
+El challenge estaba dividido en 3 niveles. Su resolución por nivel se puede acceder haciendo checkout entre las ramas del repositorio. "Main" es la rama del nivel 3. "Nivel 2" la del nivel 2 resulto. Y por el nivel 1 hay doy ramas: "Nivel1" que es la primera solución (sin clases y objetos) y una segunda versión "Nivel1_with_class" que es la misma solución pero con una arquitectura mas compleja que involucra clases y data clases. 
+
 ## Ejemplos de cURL para importar en Postman, Thunder Client o cualquier otro software de cliente: 
 
 ### POST /topsecret
