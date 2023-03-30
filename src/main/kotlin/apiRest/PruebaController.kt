@@ -122,24 +122,3 @@ class TopSecretController {
         return mensajeCompletoList.joinToString(" ")
     }
 }
-
-/*
-@SpringBootApplication
-class RunApplication
-
-@RestController
-@RequestMapping("/")
-class PruebaController {
-    @PostMapping("/prueba")
-    fun prueba(): String {
-        return "HolaMundo desde post"
-    }
-
-    @GetMapping("/prueba")
-    fun prueba1(): String {
-        return "HolaMundo desde get"
-    }
-
-}
-
- */
