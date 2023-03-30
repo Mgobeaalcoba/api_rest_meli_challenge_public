@@ -13,14 +13,78 @@ class RunApplication
 @RequestMapping("/")
 class TopSecretController {
 
+    // Objetos satelites instanciados:
+    private final val kenobi = dataClases.Satellite("kenobi", 150.0, listOf("", "este", "es", "un", "mensaje"))
+    private final val skywalker = dataClases.Satellite("skywalker", 238.0, listOf("Hola", "este", "", "un", ""))
+    private final val sato = dataClases.Satellite("sato", 176.0, listOf("", "", "es", "un", "mensaje"))
+    // Objeto TopSecretRequest instanciado:
+    val listSatellite = dataClases.TopSecretRequest(listOf(kenobi,skywalker,sato))
+
     @PostMapping("/topsecret")
     fun processTopSecret(@RequestBody request: dataClases.TopSecretRequest): ResponseEntity<Any> {
+
         val (x: Double?, y: Double?) = getLocation(request.satellites)
         val message = getMessage(request.satellites)
         val response = mapOf("message" to "RESPONSE CODE: ${HttpStatus.NOT_FOUND.value()}")
         return if (x != null && y != null) {
+            // Extra: Actualizo en el post /topsecret los valores de mis satelites
+            for (satellite in request.satellites) {
+                for (mySatellite in listSatellite.satellites) {
+                    if (satellite.name == mySatellite.name) {
+                        mySatellite.updateDistance(satellite.distance!!)
+                        mySatellite.updateMessage(satellite.message)
+                    }
+                }
+            }
             ResponseEntity.ok(dataClases.TopSecretResponse(dataClases.Position(x, y), message))
         } else {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body(response)
+        }
+    }
+
+    @PostMapping("/topsecret_split/{satellite_name}")
+    fun postSplitSatellite(@PathVariable satellite_name: String, @RequestBody body: Map<String, Any>): ResponseEntity<Any> {
+
+        // Verifico si el nombre del satélite existe en la lista de satélites registrados y si es así traerlo a la fun:
+        val satelliteData = listSatellite.satellites.find { it.name == satellite_name }
+            ?: return ResponseEntity.badRequest().body("Satellite $satellite_name not found.") // if null return ...
+
+        // Actualizar la distancia y el mensaje del satélite con los valores recibidos
+        val distance = body["distance"] as Double
+        @Suppress("UNCHECKED_CAST")
+        val message = body["message"] as List<String>
+
+        satelliteData.run {
+
+            updateDistance(distance)
+            updateMessage(message)
+        }
+
+        return ResponseEntity.ok("Data for satellite $satellite_name updated successfully.")
+    }
+
+    @GetMapping("/topsecret_split/{satellite_name}")
+    fun getSplitSatellite(@PathVariable satellite_name: String): ResponseEntity<Any> {
+        val satellite = listSatellite.satellites.find { it.name == satellite_name }
+        return if (satellite != null) {
+            val (x, y) = satellite.findPosition()
+            val messegeIsEmpty = (satellite.message.find { it == "" })
+            if (messegeIsEmpty == null) {
+                val response = dataClases.TopSecretResponse(
+                    dataClases.Position(x, y),
+                    satellite.message.joinToString(" ")
+                )
+                ResponseEntity(response, HttpStatus.OK)
+            } else {
+                val response = dataClases.TopSecretResponse(
+                    dataClases.Position(x, y),
+                    "Error: no hay suficiente información para mostrar el mensaje completo"
+                )
+                ResponseEntity(response, HttpStatus.OK)
+
+            }
+        } else {
+            val response = mapOf("message" to "RESPONSE CODE: ${HttpStatus.NOT_FOUND.value()}")
             ResponseEntity.status(HttpStatus.NOT_FOUND).body(response)
         }
     }
@@ -122,24 +186,3 @@ class TopSecretController {
         return mensajeCompletoList.joinToString(" ")
     }
 }
-
-/*
-@SpringBootApplication
-class RunApplication
-
-@RestController
-@RequestMapping("/")
-class PruebaController {
-    @PostMapping("/prueba")
-    fun prueba(): String {
-        return "HolaMundo desde post"
-    }
-
-    @GetMapping("/prueba")
-    fun prueba1(): String {
-        return "HolaMundo desde get"
-    }
-
-}
-
- */
