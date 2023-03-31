@@ -101,8 +101,12 @@ El método getSplitSatellite() de la clase TopSecretController devuelve la ubica
 
 ## Otras consideraciones: 
 
-El challenge estaba dividido en 3 niveles. Su resolución por nivel se puede acceder haciendo checkout entre las ramas del repositorio. "Main" es la rama del nivel 3. "Nivel 2" es la del nivel 2 resuelto. Para el nivel 1 hay doy ramas: "Nivel1" que es la primera solución (sin clases y objetos) y una segunda versión "Nivel1_with_class" que es la misma solución pero con una arquitectura mas compleja que involucra clases y data clases. 
-Finalmente pueden encontrar la consigna que se debía cumplir en este Meli Challenge Kotlin en el archivo en la carpeta raiz del repo llamado: "Consgina Challenge - Operacion Fuego de Quasar v1.1 KOTLIN.pdf"
+El challenge estaba dividido en **3 niveles.** Su resolución también fue por niveles y se puede acceder a cada uno de ellos haciendo **checkout entre las ramas del repositorio:**
+- **"Main"** es la rama del nivel 3. 
+- **"Nivel 2"** es la rama del nivel 2. 
+- Para el nivel 1 hay doy ramas: **"Nivel1"** que es la primera solución (sin clases y objetos) y una segunda versión **"Nivel1_with_class"** que es la misma solución pero con una arquitectura mas compleja que involucra clases y data clases.
+ 
+Finalmente pueden encontrar la consigna que se debía cumplir en este Meli Challenge Kotlin en el archivo en la carpeta raiz del repo llamado: **"Consgina Challenge - Operacion Fuego de Quasar v1.1 KOTLIN.pdf"**
 
 ## Ejemplos de cURL para importar en Postman, Thunder Client o cualquier otro software de cliente: 
 
@@ -149,7 +153,7 @@ curl --location 'http://35.202.30.49:8080/topsecret_split/sato'
 
 Podes obtener estas request y otras tres para probar los endpoints (que forman parte de la misma colection) en http://localhost:8080 descargando el el siguiente .JSON de este repo:
 
-API-REST Meli Challenge.postman_collection.json
+**API-REST Meli Challenge.postman_collection.json**
 
 Una vez descargado lo importan en Postman y listo!
 
