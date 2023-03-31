@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "6ae76ace-8d70-4d5e-a530-0ec629969160",
+		"name": "API-REST Meli Challenge",
+		"description": "## Request Colection for API REST Meli Challenge\n\n**Consideraciones importantes:**\n\nPara ejecutar las request que dicen \"Local\" debe descargar previamente la API REST desde StartFragment\n\n[Mgobeaalcoba/api_rest_meli_challenge_public: REST API produced for the Meli Challenge: \"Operation Quasar Fire\" (github.com)](https://github.com/Mgobeaalcoba/api_rest_meli_challenge_public)\n\nEndFragment\n\nUna vez instalada, debe encender el servidor ejecutando el archivo main.kt para poder pegarle a cualquiera de los tres endpoints.\n\nPara pegarle a cualquier de los endpoints que dicen Hosting en el nombre de la reques esto no es necesario dado que la API está hosteada en Google Cloud y se encuentra encendida de forma permanente.\n\nDev: Mariano Gobea Alcoba [gobeamariano@gmail.com](gobeamariano@gmail.com)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22590678"
+	},
+	"item": [
+		{
+			"name": "POST Hosting a topsecret",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"satellites\": [\n{\n\"name\": \"kenobi\",\n\"distance\": null,\n\"message\": [\"\", \"\", \"\", \"mensaje\", \"\"] },\n{\n\"name\": \"skywalker\",\n\"distance\": 215.5,\n\"message\": [\"\", \"es\", \"\", \"\", \"secreto\"] },\n{\n\"name\": \"sato\",\n\"distance\": 342.7,\n\"message\": [\"este\", \"\", \"un\", \"\", \"\"] }\n]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://35.202.30.49:8080/topsecret",
+					"protocol": "http",
+					"host": [
+						"35",
+						"202",
+						"30",
+						"49"
+					],
+					"port": "8080",
+					"path": [
+						"topsecret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Local a topsecret",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"satellites\": [\n{\n\"name\": \"kenobi\",\n\"distance\": null,\n\"message\": [\"\", \"\", \"\", \"mensaje\", \"\"] },\n{\n\"name\": \"skywalker\",\n\"distance\": 215.5,\n\"message\": [\"\", \"es\", \"\", \"\", \"secreto\"] },\n{\n\"name\": \"sato\",\n\"distance\": 342.7,\n\"message\": [\"este\", \"\", \"un\", \"\", \"\"] }\n]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/topsecret",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"topsecret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Local a topsecret_split",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"distance\": 557.0,\r\n\"message\": [\"\", \"\", \"\", \"mensaje\", \"\"] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/topsecret_split/:satellite_name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"topsecret_split",
+						":satellite_name"
+					],
+					"variable": [
+						{
+							"key": "satellite_name",
+							"value": "sato000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Hosting a topsecret_split Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"distance\": 557.0,\r\n\"message\": [\"\", \"\", \"\", \"mensaje\", \"\"] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://35.202.30.49:8080/topsecret_split/:satellite_name",
+					"protocol": "http",
+					"host": [
+						"35",
+						"202",
+						"30",
+						"49"
+					],
+					"port": "8080",
+					"path": [
+						"topsecret_split",
+						":satellite_name"
+					],
+					"variable": [
+						{
+							"key": "satellite_name",
+							"value": "sato000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Local a topsecret_split",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GET Hosting a topsecret_split Copy",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
