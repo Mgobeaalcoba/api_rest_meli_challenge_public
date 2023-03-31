@@ -151,7 +151,7 @@ curl --location 'http://35.202.30.49:8080/topsecret_split/sato'
 ```
 ## Extra:
 
-Podes obtener estas request y otras tres para probar los endpoints (que forman parte de la misma colection) en http://localhost:8080 descargando el el siguiente .JSON de este repo:
+Podes obtener estas request y otras tres que forman parte de una misma colection de testeo de los endpoints en http://localhost:8080 descargando el el siguiente .JSON de este repo:
 
 **API-REST Meli Challenge.postman_collection.json**
 
