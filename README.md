@@ -160,7 +160,7 @@ Una vez descargado lo importan en Postman y listo!
 Importante: para probarlo en local host primero vas a tener que clonar el repositorio actual en tu PC
 
 ```bash
-https://github.com/Mgobeaalcoba/api_rest_meli_challenge_public.git
+git clone https://github.com/Mgobeaalcoba/api_rest_meli_challenge_public.git
 ```
 
 luego ubicarte en el directorio clonado y compilarlo con el siguiente comando: 
