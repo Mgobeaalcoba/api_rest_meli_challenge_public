@@ -1,6 +1,6 @@
 package dataClases
 
 data class TopSecretResponse(
-    val position: Position,
+    val position: Coordinates,
     val message: String?
 )

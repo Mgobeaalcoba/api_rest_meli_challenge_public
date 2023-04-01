@@ -1,15 +1,20 @@
 package dataClases
 
+import java.util.*
+
 data class Satellite(
-    val name: String,
+    var name: String,
     var distance: Double?,
     var message: List<String> = emptyList(),
 ) {
+    init {
+        this.name = name.lowercase(Locale.getDefault())
+    }
     companion object {
         // Coordenadas conocidas de los tres satélites
-        val coordenadasKenobi = Pair(-500.0, -200.0)
-        val coordenadasSkywalker = Pair(100.0, -100.0)
-        val coordenadasSato = Pair(500.0, 100.0)
+        val coordenadasKenobi = Coordinates(-500.0, -200.0)
+        val coordenadasSkywalker = Coordinates(100.0, -100.0)
+        val coordenadasSato = Coordinates(500.0, 100.0)
     }
 
     fun updateDistance(distance: Double) {
@@ -20,7 +25,7 @@ data class Satellite(
         this.message = message
     }
 
-    fun findPosition() :Pair<Double?, Double?> {
+    fun findPosition() : Coordinates {
         return when (this.name) {
             "kenobi" -> {
                 coordenadasKenobi
@@ -32,7 +37,7 @@ data class Satellite(
                 coordenadasSato
             }
             else -> {
-                Pair(null, null)
+                Coordinates(null,null)
             }
         }
     }
