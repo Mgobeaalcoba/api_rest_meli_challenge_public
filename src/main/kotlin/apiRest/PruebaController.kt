@@ -95,22 +95,22 @@ class TopSecretController {
 
         // Distancia a cada satélite desde la fuente del mensaje. La suposición acá es que vienen en el orden propuesto
         // abajo. Que es el mismo orden en que acomodé las coordenadas del satélite arriba. (kenobi, skywalker, sato)
-        val distanciaKenobi = satellites[0].distance
-        val distanciaSkywalker = satellites[1].distance
-        val distanciaSato = satellites[2].distance
+        val distanceKenobi = satellites[0].distance
+        val distanceSkywalker = satellites[1].distance
+        val distanceSato = satellites[2].distance
 
         // Se calcula la distancia al cuadrado entre cada satélite y la fuente del mensaje
-        val d1Sq = distanciaKenobi!!.pow(2)
-        val d2Sq = distanciaSkywalker!!.pow(2)
-        val d3Sq = distanciaSato!!.pow(2)
+        val d1Sq = distanceKenobi!!.pow(2)
+        val d2Sq = distanceSkywalker!!.pow(2)
+        val d3Sq = distanceSato!!.pow(2)
 
         // Se obtienen las coordenadas de cada satélite.
-        val x1 = dataClases.Satellite.coordenadasKenobi.latitude
-        val y1 = dataClases.Satellite.coordenadasKenobi.longitude
-        val x2 = dataClases.Satellite.coordenadasSkywalker.latitude
-        val y2 = dataClases.Satellite.coordenadasSkywalker.longitude
-        val x3 = dataClases.Satellite.coordenadasSato.latitude
-        val y3 = dataClases.Satellite.coordenadasSato.longitude
+        val x1 = dataClases.Satellite.coordinatesKenobi.latitude
+        val y1 = dataClases.Satellite.coordinatesKenobi.longitude
+        val x2 = dataClases.Satellite.coordinatesSkywalker.latitude
+        val y2 = dataClases.Satellite.coordinatesSkywalker.longitude
+        val x3 = dataClases.Satellite.coordinatesSato.latitude
+        val y3 = dataClases.Satellite.coordinatesSato.longitude
 
         // Se calculan las coordenadas obtenidas al cuadrado para luego usarse para obtener las diferencias:
         val x1Sq = x1!!.pow(2)
@@ -139,9 +139,9 @@ class TopSecretController {
     private fun getMessage(satellites: List<dataClases.Satellite>): String {
 
         // Misma suposición que en getLocation(). Los mensajes ingresan ordenados [0] = Kenobi, [1] = Skywalker, [2] = Sato
-        val mensajeKenobi = satellites[0].message
-        val mensajeSkywalker = satellites[1].message
-        val mensajeSato = satellites[2].message
+        val messageKenobi = satellites[0].message
+        val messageSkywalker = satellites[1].message
+        val messageSato = satellites[2].message
 
         val mensajeCompletoList  = mutableListOf<String>()
         var largoMensajeCompletoList = 0
@@ -158,12 +158,12 @@ class TopSecretController {
 
         for (i in mensajeCompletoList.indices) {
             if (mensajeCompletoList[i] == "") {
-                if (mensajeKenobi[i] != "") {
-                    mensajeCompletoList[i] = mensajeKenobi[i]
-                } else if (mensajeSkywalker[i] != "") {
-                    mensajeCompletoList[i] = mensajeSkywalker[i]
+                if (messageKenobi[i] != "") {
+                    mensajeCompletoList[i] = messageKenobi[i]
+                } else if (messageSkywalker[i] != "") {
+                    mensajeCompletoList[i] = messageSkywalker[i]
                 } else {
-                    mensajeCompletoList[i] = mensajeSato[i]
+                    mensajeCompletoList[i] = messageSato[i]
                 }
             }
         }

@@ -12,9 +12,9 @@ data class Satellite(
     }
     companion object {
         // Coordenadas conocidas de los tres satélites
-        val coordenadasKenobi = Coordinates(-500.0, -200.0)
-        val coordenadasSkywalker = Coordinates(100.0, -100.0)
-        val coordenadasSato = Coordinates(500.0, 100.0)
+        val coordinatesKenobi = Coordinates(-500.0, -200.0)
+        val coordinatesSkywalker = Coordinates(100.0, -100.0)
+        val coordinatesSato = Coordinates(500.0, 100.0)
     }
 
     fun updateDistance(distance: Double) {
@@ -28,13 +28,13 @@ data class Satellite(
     fun findPosition() : Coordinates {
         return when (this.name) {
             "kenobi" -> {
-                coordenadasKenobi
+                coordinatesKenobi
             }
             "skywalker" -> {
-                coordenadasSkywalker
+                coordinatesSkywalker
             }
             "sato" -> {
-                coordenadasSato
+                coordinatesSato
             }
             else -> {
                 Coordinates(null,null)
