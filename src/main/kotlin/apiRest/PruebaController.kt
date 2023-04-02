@@ -1,3 +1,22 @@
+/**
+ * API REST que recibe solicitudes para obtener la ubicación de un objeto y un mensaje de radio que se envía desde un punto
+ * desconocido en el espacio exterior, a partir de información obtenida de tres satélites (Kenobi, Skywalker y Sato).
+ *
+ * Los datos de cada satélite incluyen la distancia entre el satélite y el objeto desconocido, así como un fragmento del mensaje completo.
+ * El objetivo es calcular la ubicación del objeto y recuperar el mensaje original, que se ha transmitido como una lista de cadenas
+ * en tres fragmentos distintos, uno por cada satélite.
+ *
+ * Este servicio tiene dos puntos finales:
+ *  - "/topsecret", que recibe y procesa la información de los tres satélites de una sola vez.
+ *  - "/topsecret_split", que permite enviar la información de cada satélite por separado y recuperar la información completa del mensaje
+ *    cuando se haya obtenido información de todos los satélites.
+ *
+ * @see [dataClases.Satellite]
+ * @see [dataClases.TopSecretRequest]
+ * @see [dataClases.TopSecretResponse]
+ * @see [dataClases.Coordinates]
+ * @see [enumClases.SatelliteName]
+ */
 package apiRest
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -6,9 +25,16 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import kotlin.math.pow
 
+/**
+ * Punto de inicio de la aplicación Spring Boot.
+ */
 @SpringBootApplication
 class RunApplication
 
+/**
+ * Controlador REST para el punto final "/topsecret" que procesa la información de los tres satélites de una sola vez.
+ * La ubicación del objeto desconocido y el mensaje completo se calculan a partir de la información recibida de los tres satélites.
+ */
 @RestController
 @RequestMapping("/")
 class TopSecretController {
@@ -21,6 +47,12 @@ class TopSecretController {
     // Objeto TopSecretRequest instanciado:
     private val listSatellite = listOf(kenobi,skywalker,sato)
 
+    /**
+     * Método que procesa la petición POST en la URL "/topsecret" y devuelve la ubicación y mensaje del objeto desconocido.
+     *
+     * @param request objeto [dataClases.TopSecretRequest] que contiene la información de los satélites.
+     * @return objeto [ResponseEntity] que contiene la ubicación y mensaje del objeto desconocido o un mensaje de error si no se recibió información suficiente.
+     */
     @PostMapping("/topsecret")
     fun processTopSecret(@RequestBody request: dataClases.TopSecretRequest): ResponseEntity<Any> {
         val (x: Double?, y: Double?) = getLocation(request.satellites)
@@ -42,6 +74,14 @@ class TopSecretController {
         }
     }
 
+    /**
+     * POST endpoint que recibe y actualiza la información de un satélite en particular.
+     * Si el nombre del satélite existe en la lista de satélites registrados, se actualiza su información con los valores recibidos en el body.
+     * Si no existe, se retorna un error 400 Bad Request indicando que el satélite no fue encontrado.
+     * @param satellite_name El nombre del satélite a actualizar.
+     * @param body El cuerpo de la petición HTTP, que contiene la distancia y el mensaje recibidos desde el satélite.
+     * @return Un objeto ResponseEntity que contiene un mensaje de éxito si el satélite fue actualizado, o un error 400 Bad Request si no se encontró el satélite.
+     */
     @PostMapping("/topsecret_split/{satellite_name}")
     fun postSplitSatellite(@PathVariable satellite_name: String, @RequestBody body: Map<String, Any>): ResponseEntity<Any> {
 
@@ -56,6 +96,14 @@ class TopSecretController {
         return ResponseEntity.ok("Data for satellite ${satellite_name.lowercase()} updated successfully.")
     }
 
+    /**
+     * Controlador para la solicitud GET "/topsecret_split/{satellite_name}", que devuelve la información de un satélite individual.
+     * Si el satélite no tiene suficiente información para determinar la ubicación y el mensaje del objeto desconocido, se devuelve un mensaje de error.
+     *
+     * @param satellite_name el nombre del satélite para el que se solicita información
+     *
+     * @return un objeto ResponseEntity con la información del objeto desconocido y el mensaje completo, o un mensaje de error si no hay suficiente información.
+     */
     @GetMapping("/topsecret_split/{satellite_name}")
     fun getSplitSatellite(@PathVariable satellite_name: String): ResponseEntity<Any> {
         val satellite = listSatellite.find { it.name == satellite_name.lowercase() }
@@ -81,6 +129,14 @@ class TopSecretController {
         }
     }
 
+    /**
+     * Esta función calcula las coordenadas de la fuente del mensaje a partir de las distancias a tres satélites
+     * conocidos y sus respectivas coordenadas.
+     *
+     * @param satellites Lista de tres objetos de tipo [dataClases.Satellite] que representan los satélites conocidos.
+     * @return Retorna un objeto de tipo [dataClases.Coordinates] que contiene las coordenadas de la fuente del mensaje
+     * si se pudieron calcular. Si no es posible triangular las coordenadas, retorna un objeto con coordenadas nulas.
+     */
     private fun getLocation(satellites: List<dataClases.Satellite>): dataClases.Coordinates {
 
         // Se valida que se reciban las tres distancias. Caso contrario no posible triangular y devolvemos null
@@ -136,6 +192,16 @@ class TopSecretController {
         return dataClases.Coordinates(x,y)
     }
 
+    /**
+     * Devuelve el mensaje original recibido por los satélites.
+     *
+     * El mensaje recibido por cada satélite se ingresa en el orden [0] = Kenobi, [1] = Skywalker, [2] = Sato.
+     * Se recorren los mensajes de cada satélite y se construye el mensaje original. Si un satélite no tiene un
+     * caracter para una determinada posición del mensaje, se utiliza el caracter de otro satélite.
+     *
+     * @param satellites La lista de satélites que recibieron el mensaje.
+     * @return El mensaje original recibido por los satélites.
+     */
     private fun getMessage(satellites: List<dataClases.Satellite>): String {
 
         // Misma suposición que en getLocation(). Los mensajes ingresan ordenados [0] = Kenobi, [1] = Skywalker, [2] = Sato
