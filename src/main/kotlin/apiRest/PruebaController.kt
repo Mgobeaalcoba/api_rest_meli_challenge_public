@@ -6,7 +6,7 @@
  * El objetivo es calcular la ubicación del objeto y recuperar el mensaje original, que se ha transmitido como una lista de cadenas
  * en tres fragmentos distintos, uno por cada satélite.
  *
- * Este servicio tiene dos puntos finales:
+ * Este servicio tiene dos endpoints:
  *  - "/topsecret", que recibe y procesa la información de los tres satélites de una sola vez.
  *  - "/topsecret_split", que permite enviar la información de cada satélite por separado y recuperar la información completa del mensaje
  *    cuando se haya obtenido información de todos los satélites.
@@ -32,8 +32,10 @@ import kotlin.math.pow
 class RunApplication
 
 /**
- * Controlador REST para el punto final "/topsecret" que procesa la información de los tres satélites de una sola vez.
- * La ubicación del objeto desconocido y el mensaje completo se calculan a partir de la información recibida de los tres satélites.
+ * Controlador REST para los endpoints "/topsecret" y "/topsecret_split/{satellite_name} que procesa la información de los tres satélites de una sola vez en el primer endpoint
+ * o de cada satélite en el segundo endpoint. El controlador cuanta con funciones que le permiten obtener:
+ * 1- La ubicación del objeto desconocido.
+ * 2- El mensaje completo se calculan a partir de la información recibida de los tres satélites.
  */
 @RestController
 @RequestMapping("/")
@@ -75,7 +77,7 @@ class TopSecretController {
     }
 
     /**
-     * POST endpoint que recibe y actualiza la información de un satélite en particular.
+     * Método que procesa la petición POST en el endpoint "/topsecret_split/{satellite_name}". El mismo recibe y actualiza la información de un satélite en particular.
      * Si el nombre del satélite existe en la lista de satélites registrados, se actualiza su información con los valores recibidos en el body.
      * Si no existe, se retorna un error 400 Bad Request indicando que el satélite no fue encontrado.
      * @param satellite_name El nombre del satélite a actualizar.
@@ -97,7 +99,7 @@ class TopSecretController {
     }
 
     /**
-     * Controlador para la solicitud GET "/topsecret_split/{satellite_name}", que devuelve la información de un satélite individual.
+     * Método para la petición GET "/topsecret_split/{satellite_name}", que devuelve la información de un satélite individual.
      * Si el satélite no tiene suficiente información para determinar la ubicación y el mensaje del objeto desconocido, se devuelve un mensaje de error.
      *
      * @param satellite_name el nombre del satélite para el que se solicita información
@@ -193,7 +195,7 @@ class TopSecretController {
     }
 
     /**
-     * Devuelve el mensaje original recibido por los satélites.
+     * Esta función devuelve el mensaje original recibido por los satélites.
      *
      * El mensaje recibido por cada satélite se ingresa en el orden [0] = Kenobi, [1] = Skywalker, [2] = Sato.
      * Se recorren los mensajes de cada satélite y se construye el mensaje original. Si un satélite no tiene un

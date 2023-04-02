@@ -23,6 +23,8 @@ class DemoApplicationTests {
 	/**
 	 * Método de prueba que simplemente verifica que el contexto de la aplicación se cargue correctamente.
 	 * Si el contexto se carga sin errores, entonces la prueba es exitosa.
+	 * Es una forma automatizada que realiza las mismas pruebas que podríamos realizar con un cliente y haciendo
+	 * peticiones POST y GET a los endpoints de nuestra API REST.
 	 */
 	@Test
 	fun contextLoads() {
