@@ -163,12 +163,12 @@ class TopSecretController {
         val d3Sq = distanceSato!!.pow(2)
 
         // Se obtienen las coordenadas de cada satélite.
-        val x1 = dataClases.Satellite.coordinatesKenobi.latitude
-        val y1 = dataClases.Satellite.coordinatesKenobi.longitude
-        val x2 = dataClases.Satellite.coordinatesSkywalker.latitude
-        val y2 = dataClases.Satellite.coordinatesSkywalker.longitude
-        val x3 = dataClases.Satellite.coordinatesSato.latitude
-        val y3 = dataClases.Satellite.coordinatesSato.longitude
+        val x1 = dataClases.Satellite.coordinatesKenobi.x
+        val y1 = dataClases.Satellite.coordinatesKenobi.y
+        val x2 = dataClases.Satellite.coordinatesSkywalker.x
+        val y2 = dataClases.Satellite.coordinatesSkywalker.y
+        val x3 = dataClases.Satellite.coordinatesSato.x
+        val y3 = dataClases.Satellite.coordinatesSato.y
 
         // Se calculan las coordenadas obtenidas al cuadrado para luego usarse para obtener las diferencias:
         val x1Sq = x1!!.pow(2)
