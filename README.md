@@ -83,13 +83,15 @@ Si la información de los satélites no es suficiente para determinar la posici�
 
 ## Consideraciones
 
-La clase TopSecretRequest contiene los tres satélites conocidos y el mensaje secreto enviado por la nave.
+La clase TopSecretRequest explicita el formato del body aceptado en la request. El mismo debe contener una lista de los satélites conocidos así con el mensaje secreto tal como lo recibió cada satelite.
 
-La clase TopSecretResponse contiene la ubicación de la nave y el mensaje secreto descifrado.
+La clase TopSecretResponse explicita el formato de response que va a devolver la API REST. El mismo contiene la ubicación de la nave y el mensaje secreto descifrado.
 
 La clase Satellite representa un satélite y contiene su nombre, su distancia a la nave y un fragmento del mensaje secreto.
 
-El archivo dataClasses.kt contiene todas las clases mencionadas anteriormente.
+La clase Coordinates representa las coordenadas que permiten ubicar una nave dentro de un plano cartesiano bi-dimensional. 
+
+La enumClass SatelliteName contiene los nombres de los tres satélites que forman parte de nuestros recursos y que usamos para encontrar la nave enemiga y reconstruir el mensaje. 
 
 El método getLocation() de la clase TopSecretController calcula la ubicación de la nave a partir de la distancia a cada uno de los tres satélites conocidos. Si no se proporciona la distancia a alguno de los tres satélites, devuelve null.
 
