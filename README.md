@@ -89,9 +89,15 @@ La clase TopSecretResponse explicita el formato de response que va a devolver la
 
 La clase Satellite representa un satélite y contiene su nombre, su distancia a la nave y un fragmento del mensaje secreto.
 
+<<<<<<< HEAD
 La clase Coordinates representa las coordenadas que permiten ubicar una nave dentro de un plano cartesiano bi-dimensional.
 
 La enumClass SatelliteName contiene los nombres de los tres satélites que forman parte de nuestros recursos y que usamos para encontrar la nave enemiga y reconstruir el mensaje.
+=======
+La clase Coordinates representa las coordenadas que permiten ubicar una nave dentro de un plano cartesiano bi-dimensional. 
+
+La enumClass SatelliteName contiene los nombres de los tres satélites que forman parte de nuestros recursos y que usamos para encontrar la nave enemiga y reconstruir el mensaje. 
+>>>>>>> c6257b6fba5f68a18d34f488d3a3b2b11c71e157
 
 El método getLocation() de la clase TopSecretController calcula la ubicación de la nave a partir de la distancia a cada uno de los tres satélites conocidos. Si no se proporciona la distancia a alguno de los tres satélites, devuelve null.
 
