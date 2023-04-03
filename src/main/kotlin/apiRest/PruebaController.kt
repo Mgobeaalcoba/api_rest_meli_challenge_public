@@ -1,3 +1,5 @@
+package apiRest
+
 /**
  * API REST que recibe solicitudes para obtener la ubicación de un objeto y un mensaje de radio que se envía desde un punto
  * desconocido en el espacio exterior, a partir de información obtenida de tres satélites (Kenobi, Skywalker y Sato).
@@ -17,7 +19,6 @@
  * @see [dataClases.Coordinates]
  * @see [enumClases.SatelliteName]
  */
-package apiRest
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.http.HttpStatus
