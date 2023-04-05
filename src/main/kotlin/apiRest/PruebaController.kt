@@ -47,7 +47,7 @@ class TopSecretController {
     private final val skywalker = dataClases.Satellite(enumClases.SatelliteName.SKYWALKER.name, 238.0, listOf("Hola", "este", "", "un", ""))
     private final val sato = dataClases.Satellite(enumClases.SatelliteName.SATO.name, 176.0, listOf("", "", "es", "un", "mensaje"))
 
-    // Objeto TopSecretRequest instanciado:
+    // Creo una lista de satellites: 
     private val listSatellite = listOf(kenobi,skywalker,sato)
 
     /**
