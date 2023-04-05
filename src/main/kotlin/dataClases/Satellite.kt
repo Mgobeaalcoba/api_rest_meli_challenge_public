@@ -22,11 +22,9 @@ data class Satellite(
         this.name = name.lowercase(Locale.getDefault())
     }
     companion object {
-        // Coordenadas conocidas de los tres satélites
         /**
          * Coordenadas del satélite Kenobi.
          */
-        // Coordenadas conocidas de los tres satélites
         val coordinatesKenobi = Coordinates(-500.0, -200.0)
         /**
          * Coordenadas del satélite Skywalker.
