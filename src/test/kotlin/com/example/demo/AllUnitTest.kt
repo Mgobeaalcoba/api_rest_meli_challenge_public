@@ -14,14 +14,19 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+/**
+ * Test class for the main function.
+ */
 class MainTest {
 
+	/**
+	 * Test case for the main function.
+	 * It executes the main function without throwing exceptions.
+	 * If the execution reaches this point without throwing exceptions, the test is considered successful.
+	 */
 	@Test
 	fun testMain() {
-		// Ejecuta la función main sin lanzar excepciones
 		main(emptyArray())
-
-		// Si la ejecución llega hasta este punto sin lanzar excepciones, la prueba se considera exitosa
 	}
 }
 
@@ -53,17 +58,28 @@ class DemoApplicationTests {
 	/* TODO: Make unit test for all classes in API */
 }
 
+/**
+ * Test class for the TopSecretController.
+ */
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [TopSecretController::class])
 class TopSecretControllerTest {
 
 	private lateinit var controller: TopSecretController
 
+	/**
+	 * Setup method executed before each test case.
+	 * Initializes the controller instance.
+	 */
 	@BeforeEach
 	fun setUp() {
 		controller = TopSecretController()
 	}
 
+	/**
+	 * Test case for the processTopSecret method.
+	 * It tests the processing of a TopSecretRequest and verifies the response.
+	 */
 	@Test
 	fun testProcessTopSecret() {
 		val satellite1 = Satellite("Kenobi", 100.0, listOf("message1", "", "message3"))
@@ -83,6 +99,10 @@ class TopSecretControllerTest {
 		assertEquals("message1 message2 message3", responseBody.message)
 	}
 
+	/**
+	 * Test case for the postSplitSatellite method.
+	 * It tests the processing of a split satellite data and verifies the response.
+	 */
 	@Test
 	fun testPostSplitSatellite() {
 		val satelliteName = "Kenobi"
@@ -94,6 +114,10 @@ class TopSecretControllerTest {
 		assertEquals("Data for satellite kenobi updated successfully.", response.body)
 	}
 
+	/**
+	 * Test case for the getSplitSatellite method.
+	 * It tests the retrieval of information for a split satellite and verifies the response.
+	 */
 	@Test
 	fun testGetSplitSatellite() {
 		val satelliteName = "Kenobi"
