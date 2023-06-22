@@ -7,9 +7,9 @@ import kotlin.math.pow
 
 class SatelliteService {
 
-    private final val kenobi = Satellite(SatelliteName.KENOBI.name, 150.0, listOf("", "este", "es", "un", "mensaje"))
-    private final val skywalker = Satellite(SatelliteName.SKYWALKER.name, 238.0, listOf("Hola", "este", "", "un", ""))
-    private final val sato = Satellite(SatelliteName.SATO.name, 176.0, listOf("", "", "es", "un", "mensaje"))
+    private val kenobi = Satellite(SatelliteName.KENOBI.name, 150.0, listOf("", "este", "es", "un", "mensaje"))
+    private val skywalker = Satellite(SatelliteName.SKYWALKER.name, 238.0, listOf("Hola", "este", "", "un", ""))
+    private val sato = Satellite(SatelliteName.SATO.name, 176.0, listOf("", "", "es", "un", "mensaje"))
 
     val listSatellite = listOf(kenobi,skywalker,sato)
 

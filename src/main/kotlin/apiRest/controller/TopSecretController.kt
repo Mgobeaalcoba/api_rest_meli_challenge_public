@@ -131,5 +131,4 @@ class TopSecretController {
             ResponseEntity.status(HttpStatus.NOT_FOUND).body(response)
         }
     }
-
 }
