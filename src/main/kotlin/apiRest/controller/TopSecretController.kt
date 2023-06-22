@@ -1,23 +1,23 @@
 package apiRest.controller
 
 /**
- * API REST que recibe solicitudes para obtener la ubicación de un objeto y un mensaje de radio que se envía desde un punto
- * desconocido en el espacio exterior, a partir de información obtenida de tres satélites (Kenobi, Skywalker y Sato).
+ * REST API that receives requests to get the location of an object and a radio message that is sent from a point
+ * unknown in outer space, based on information obtained from three satellites (Kenobi, Skywalker and Sato).
  *
- * Los datos de cada satélite incluyen la distancia entre el satélite y el objeto desconocido, así como un fragmento del mensaje completo.
- * El objetivo es calcular la ubicación del objeto y recuperar el mensaje original, que se ha transmitido como una lista de cadenas
- * en tres fragmentos distintos, uno por cada satélite.
+ * The data for each satellite includes the distance between the satellite and the unknown object, as well as a fragment of the complete message.
+ * The goal is to calculate the location of the object and retrieve the original message, which has been transmitted as a list of strings
+ * in three different fragments, one for each satellite.
  *
- * Este servicio tiene dos endpoints:
- *  - "/topsecret", que recibe y procesa la información de los tres satélites de una sola vez.
- *  - "/topsecret_split", que permite enviar la información de cada satélite por separado y recuperar la información completa del mensaje
- *    cuando se haya obtenido información de todos los satélites.
+ * This service has two endpoints:
+ * - "/topsecret", which receives and processes information from all three satellites at once.
+ * - "/topsecret_split", which allows sending the information of each satellite separately and recovering the complete information of the message
+ * when information has been obtained from all satellites.
  *
- * @see [dataClases.Satellite]
- * @see [dataClases.TopSecretRequest]
- * @see [dataClases.TopSecretResponse]
- * @see [dataClases.Coordinates]
- * @see [enumClases.SatelliteName]
+ * @see [dataClasses.Satellite]
+ * @see [dataClasses.TopSecretRequest]
+ * @see [dataClasses.TopSecretResponse]
+ * @see [dataClasses.Coordinates]
+ * @see [enumClasses.SatelliteName]
  */
 
 import apiRest.model.enumClases.SatelliteName
@@ -32,16 +32,16 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 /**
- * Punto de inicio de la aplicación Spring Boot.
+ * Starting point of the Spring Boot application.
  */
 @SpringBootApplication
 class RunApplication
 
 /**
- * Controlador REST para los endpoints "/topsecret" y "/topsecret_split/{satellite_name} que procesa la información de los tres satélites de una sola vez en el primer endpoint
- * o de cada satélite en el segundo endpoint. El controlador cuanta con funciones que le permiten obtener:
- * 1- La ubicación del objeto desconocido.
- * 2- El mensaje completo se calculan a partir de la información recibida de los tres satélites.
+ * REST controller for "/topsecret" and "/topsecret_split/{satellite_name} endpoints that processes information from all three satellites at once on the first endpoint
+ * or from each satellite on the second endpoint. The controller has functions that allow you to obtain:
+ * 1- The location of the unknown object.
+ * 2- The complete message is calculated from the information received from the three satellites.
  */
 @RestController
 @RequestMapping("/")
@@ -50,10 +50,10 @@ class TopSecretController {
     private lateinit var satelliteService: SatelliteService
 
     /**
-     * Método que procesa la petición POST en la URL "/topsecret" y devuelve la ubicación y mensaje del objeto desconocido.
+     * Method that processes the POST request at the URL "/topsecret" and returns the location and message of the unknown object.
      *
-     * @param request objeto [dataClases.TopSecretRequest] que contiene la información de los satélites.
-     * @return objeto [ResponseEntity] que contiene la ubicación y mensaje del objeto desconocido o un mensaje de error si no se recibió información suficiente.
+     * @param request object [dataClases.TopSecretRequest] that contains the information of the satellites.
+     * @return [ResponseEntity] object containing the location and message of the unknown object or an error message if not enough information was received.
      */
     @PostMapping("/topsecret")
     fun processTopSecret(@RequestBody request: TopSecretRequest): ResponseEntity<Any> {
@@ -78,12 +78,12 @@ class TopSecretController {
     }
 
     /**
-     * Método que procesa la petición POST en el endpoint "/topsecret_split/{satellite_name}". El mismo recibe y actualiza la información de un satélite en particular.
-     * Si el nombre del satélite existe en la lista de satélites registrados, se actualiza su información con los valores recibidos en el body.
-     * Si no existe, se retorna un error 400 Bad Request indicando que el satélite no fue encontrado.
-     * @param satellite_name El nombre del satélite a actualizar.
-     * @param body El cuerpo de la petición HTTP, que contiene la distancia y el mensaje recibidos desde el satélite.
-     * @return Un objeto ResponseEntity que contiene un mensaje de éxito si el satélite fue actualizado, o un error 400 Bad Request si no se encontró el satélite.
+     * Method that processes the POST request on the endpoint "/topsecret_split/{satellite_name}". It receives and updates the information from a particular satellite.
+     * If the name of the satellite exists in the list of registered satellites, its information is updated with the values received in the body.
+     * If it does not exist, a 400 Bad Request error is returned indicating that the satellite was not found.
+     * @param satellite_name The name of the satellite to update.
+     * @param body The body of the HTTP request, containing the distance and the message received from the satellite.
+     * @return A ResponseEntity object containing a success message if the satellite was updated, or a 400 Bad Request error if the satellite was not found.
      */
     @PostMapping("/topsecret_split/{satellite_name}")
     fun postSplitSatellite(@PathVariable satellite_name: String, @RequestBody body: Map<String, Any>): ResponseEntity<Any> {
@@ -100,12 +100,12 @@ class TopSecretController {
     }
 
     /**
-     * Método para la petición GET "/topsecret_split/{satellite_name}", que devuelve la información de un satélite individual.
-     * Si el satélite no tiene suficiente información para determinar la ubicación y el mensaje del objeto desconocido, se devuelve un mensaje de error.
+     * Method for the GET request "/topsecret_split/{satellite_name}", which returns the information of an individual satellite.
+     * If the satellite does not have enough information to determine the location and message of the unknown object, an error message is returned.
      *
-     * @param satellite_name el nombre del satélite para el que se solicita información
+     * @param satellite_name the name of the satellite for which information is requested
      *
-     * @return un objeto ResponseEntity con la información del objeto desconocido y el mensaje completo, o un mensaje de error si no hay suficiente información.
+     * @return a ResponseEntity object with the unknown object information and the full message, or an error message if there is not enough information.
      */
     @GetMapping("/topsecret_split/{satellite_name}")
     fun getSplitSatellite(@PathVariable satellite_name: String): ResponseEntity<Any> {

@@ -1,10 +1,10 @@
 package apiRest.model.dataClases
 
 /**
- * Clase que representa la respuesta del servicio Top Secret.
+ * Class representing the response from the Top Secret service.
  *
- * @property position Las coordenadas `x` e `y` que representan la posición actual de la nave.
- * @property message El mensaje recibido por los satélites, si se pudo decodificar. En caso contrario, será `null`.
+ * @property position The `x` and `y` coordinates that represent the current position of the ship.
+ * @property message The message received by the satellites, if it could be decoded. Otherwise, it will be `null`.
  */
 data class TopSecretResponse(
     val position: Coordinates,

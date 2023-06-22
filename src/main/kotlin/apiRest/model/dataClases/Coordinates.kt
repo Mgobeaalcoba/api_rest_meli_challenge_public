@@ -1,10 +1,10 @@
 package apiRest.model.dataClases
 
 /**
- * Clase que modela las coordenadas de un punto geográfico.
+ * Class that models the coordinates of a geographic point.
  *
- * @property x La latitud del punto geográfico.
- * @property y La longitud del punto geográfico.
+ * @property x The latitude of the geographic point.
+ * @property y The longitude of the geographic point.
  */
 data class Coordinates (
     val x : Double?,

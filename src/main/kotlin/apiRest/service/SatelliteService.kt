@@ -16,12 +16,12 @@ class SatelliteService {
     val listSatellite = listOf(kenobi,skywalker,sato)
 
     /**
-     * Esta función calcula las coordenadas de la fuente del mensaje a partir de las distancias a tres satélites
-     * conocidos y sus respectivas coordenadas.
+     * This function calculates the coordinates of the message source from the distances to three satellites
+     * known and their respective coordinates.
      *
-     * @param satellites Lista de tres objetos de tipo [dataClases.Satellite] que representan los satélites conocidos.
-     * @return Retorna un objeto de tipo [dataClases.Coordinates] que contiene las coordenadas de la fuente del mensaje
-     * si se pudieron calcular. Si no es posible triangular las coordenadas, retorna un objeto con coordenadas nulas.
+     * @param satellites List of three objects of type [dataClasses.Satellite] that represent the known satellites.
+     * @return Returns an object of type [dataClasses.Coordinates] that contains the coordinates of the source of the message
+     * if they could be calculated. If it is not possible to triangulate the coordinates, it returns an object with null coordinates.
      */
     fun getLocation(satellites: List<Satellite>): Coordinates {
 
@@ -79,14 +79,14 @@ class SatelliteService {
     }
 
     /**
-     * Esta función devuelve el mensaje original recibido por los satélites.
+     * This function returns the original message received by the satellites.
      *
-     * El mensaje recibido por cada satélite se ingresa en el orden [0] = Kenobi, [1] = Skywalker, [2] = Sato.
-     * Se recorren los mensajes de cada satélite y se construye el mensaje original. Si un satélite no tiene un
-     * caracter para una determinada posición del mensaje, se utiliza el caracter de otro satélite.
+     * The message received by each satellite is entered in the order [0] = Kenobi, [1] = Skywalker, [2] = Sato.
+     * The messages from each satellite are traversed and the original message is built. If a satellite does not have a
+     * character for a certain position of the message, the character of another satellite is used.
      *
-     * @param satellites La lista de satélites que recibieron el mensaje.
-     * @return El mensaje original recibido por los satélites.
+     * @param satellites The list of satellites that received the message.
+     * @return The original message received by the satellites.
      */
     fun getMessage(satellites: List<Satellite>): String {
 

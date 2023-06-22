@@ -1,9 +1,9 @@
 package apiRest.model.dataClases
 
 /**
- * Clase que representa la solicitud para el servicio "TopSecret".
+ * Class representing the request for the "TopSecret" service.
  *
- * @param satellites una lista de objetos [Satellite] que contienen información sobre los satélites que recibieron el mensaje.
+ * @param satellites a list of [Satellite] objects containing information about the satellites that received the message.
  */
 data class TopSecretRequest(
     val satellites: List<Satellite>

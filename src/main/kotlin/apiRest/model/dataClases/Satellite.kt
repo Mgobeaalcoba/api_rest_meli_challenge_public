@@ -3,11 +3,11 @@ package apiRest.model.dataClases
 import java.util.*
 
 /**
- * Clase que representa un satélite con su respectivo nombre, distancia y mensaje recibido.
+ * Class that represents a satellite with its respective name, distance and received message.
  *
- * @property name El nombre del satélite.
- * @property distance La distancia del satélite a la fuente del mensaje.
- * @property message El mensaje recibido por el satélite.
+ * @property name The name of the satellite.
+ * @property distance The distance from the satellite to the source of the message.
+ * @property message The message received by the satellite.
  */
 data class Satellite(
     var name: String,
@@ -15,49 +15,40 @@ data class Satellite(
     var message: List<String> = emptyList(),
 ) {
     /**
-     * Inicializador que se ejecuta inmediatamente después de que un objeto de la clase Satellite es creado.
-     * Convierte el nombre del satélite en minúsculas utilizando el idioma predeterminado del sistema.
+     * Initializer that is executed immediately after an object of class Satellite is created.
+     * Converts satellite name to lowercase using system default language.
      */
     init {
         this.name = name.lowercase(Locale.getDefault())
     }
     companion object {
-        /**
-         * Coordenadas del satélite Kenobi.
-         */
         val coordinatesKenobi = Coordinates(-500.0, -200.0)
-        /**
-         * Coordenadas del satélite Skywalker.
-         */
         val coordinatesSkywalker = Coordinates(100.0, -100.0)
-        /**
-         * Coordenadas del satélite Sato.
-         */
         val coordinatesSato = Coordinates(500.0, 100.0)
     }
 
     /**
-     * Actualiza la distancia del satélite a la fuente del mensaje.
+     * Updates the distance from the satellite to the source of the message.
      *
-     * @param distance La nueva distancia del satélite.
+     * @param distance The new distance from the satellite.
      */
     fun updateDistance(distance: Double) {
         this.distance = distance
     }
 
     /**
-     * Actualiza el mensaje recibido por el satélite.
+     * Updates the message received by the satellite.
      *
-     * @param message El nuevo mensaje recibido por el satélite.
+     * @param message The new message received by the satellite.
      */
     fun updateMessage(message: List<String>) {
         this.message = message
     }
 
     /**
-     * Encuentra las coordenadas del satélite.
+     * Find the coordinates of the satellite.
      *
-     * @return Las coordenadas del satélite como un objeto de tipo [Coordinates].
+     * @return The coordinates of the satellite as an object of type [Coordinates].
      */
     fun findPosition() : Coordinates {
         return when (this.name) {

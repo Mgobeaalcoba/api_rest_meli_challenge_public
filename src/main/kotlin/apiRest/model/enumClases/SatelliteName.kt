@@ -1,11 +1,11 @@
 package apiRest.model.enumClases
 
 /**
- * Enumeración que contiene los nombres posibles de los satélites.
+ * Enumeration containing the possible names of the satellites.
  *
- * @property KENOBI Nombre del satélite Kenobi.
- * @property SKYWALKER Nombre del satélite Skywalker.
- * @property SATO Nombre del satélite Sato.
+ * @property KENOBI Name of the Kenobi satellite.
+ * @property SKYWALKER Name of the Skywalker satellite.
+ * @property SATO Name of the Sato satellite.
  */
 enum class SatelliteName {
     KENOBI,

@@ -4,9 +4,9 @@ import apiRest.controller.RunApplication
 import org.springframework.boot.runApplication
 
 /**
- * Punto de entrada de la aplicación. Inicia la aplicación Spring Boot con la clase [RunApplication].
+ * Application entry point. Start the Spring Boot application with the [RunApplication] class.
  *
- * @param args Argumentos pasados por línea de comandos.
+ * @param args Arguments passed by command line.
  */
 fun main(args: Array<String>) {
 	runApplication<RunApplication>(*args)
