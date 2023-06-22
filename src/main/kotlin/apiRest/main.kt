@@ -1,6 +1,6 @@
 package apiRest
 
-import apiRest.RunApplication
+import apiRest.controller.RunApplication
 import org.springframework.boot.runApplication
 
 /**

@@ -1,4 +1,4 @@
-package apiRest
+package apiRest.controller
 
 /**
  * API REST que recibe solicitudes para obtener la ubicación de un objeto y un mensaje de radio que se envía desde un punto
@@ -54,7 +54,7 @@ class TopSecretController {
     private final val skywalker = Satellite(SatelliteName.SKYWALKER.name, 238.0, listOf("Hola", "este", "", "un", ""))
     private final val sato = Satellite(SatelliteName.SATO.name, 176.0, listOf("", "", "es", "un", "mensaje"))
 
-    // Objeto TopSecretRequest instanciado:
+    // Creo una lista de satellites: 
     private val listSatellite = listOf(kenobi,skywalker,sato)
 
     /**
@@ -138,4 +138,5 @@ class TopSecretController {
             ResponseEntity.status(HttpStatus.NOT_FOUND).body(response)
         }
     }
+
 }
