@@ -62,7 +62,7 @@ class TopSecretController {
         val message = satelliteService.getMessage(request.satellites)
         val response = mapOf("message" to "RESPONSE CODE: ${HttpStatus.NOT_FOUND.value()}")
         return if (x != null && y != null) {
-            // Extra: Actualizo en el post /topsecret los valores de mis satelites
+            // Extra: I update the values of my satellites in the post /topsecret
             for (satellite in request.satellites) {
                 val name = satellite.name.lowercase()
                 val mySatellite = satelliteService.listSatellite.find { it.name == name }
@@ -92,7 +92,6 @@ class TopSecretController {
         val satelliteData = satelliteService.listSatellite.find { it.name == satellite_name.lowercase() }
             ?: return ResponseEntity.badRequest().body("Satellite ${satellite_name.lowercase()} not found.") // if null return ...
 
-        // Actualizar la distancia y el mensaje del satélite con los valores recibidos
         satelliteData.updateDistance(body["distance"] as Double)
         @Suppress("UNCHECKED_CAST")
         satelliteData.updateMessage(body["message"] as List<String>)
