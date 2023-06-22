@@ -25,13 +25,11 @@ import apiRest.model.dataClases.Coordinates
 import apiRest.model.dataClases.Satellite
 import apiRest.model.dataClases.TopSecretRequest
 import apiRest.model.dataClases.TopSecretResponse
-import apiRest.service.getLocation
-import apiRest.service.getMessage
+import apiRest.service.SatelliteService
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import kotlin.math.pow
 
 /**
  * Punto de inicio de la aplicación Spring Boot.
@@ -49,13 +47,7 @@ class RunApplication
 @RequestMapping("/")
 class TopSecretController {
 
-    // Objetos satelites instanciados:
-    private final val kenobi = Satellite(SatelliteName.KENOBI.name, 150.0, listOf("", "este", "es", "un", "mensaje"))
-    private final val skywalker = Satellite(SatelliteName.SKYWALKER.name, 238.0, listOf("Hola", "este", "", "un", ""))
-    private final val sato = Satellite(SatelliteName.SATO.name, 176.0, listOf("", "", "es", "un", "mensaje"))
-
-    // Creo una lista de satellites: 
-    private val listSatellite = listOf(kenobi,skywalker,sato)
+    private lateinit var satelliteService: SatelliteService
 
     /**
      * Método que procesa la petición POST en la URL "/topsecret" y devuelve la ubicación y mensaje del objeto desconocido.
@@ -65,14 +57,15 @@ class TopSecretController {
      */
     @PostMapping("/topsecret")
     fun processTopSecret(@RequestBody request: TopSecretRequest): ResponseEntity<Any> {
-        val (x: Double?, y: Double?) = getLocation(request.satellites)
-        val message = getMessage(request.satellites)
+        satelliteService = SatelliteService()
+        val (x: Double?, y: Double?) = satelliteService.getLocation(request.satellites)
+        val message = satelliteService.getMessage(request.satellites)
         val response = mapOf("message" to "RESPONSE CODE: ${HttpStatus.NOT_FOUND.value()}")
         return if (x != null && y != null) {
             // Extra: Actualizo en el post /topsecret los valores de mis satelites
             for (satellite in request.satellites) {
                 val name = satellite.name.lowercase()
-                val mySatellite = listSatellite.find { it.name == name }
+                val mySatellite = satelliteService.listSatellite.find { it.name == name }
                 mySatellite?.run {
                     updateDistance(satellite.distance!!)
                     updateMessage(satellite.message)
@@ -94,9 +87,9 @@ class TopSecretController {
      */
     @PostMapping("/topsecret_split/{satellite_name}")
     fun postSplitSatellite(@PathVariable satellite_name: String, @RequestBody body: Map<String, Any>): ResponseEntity<Any> {
-
+        satelliteService = SatelliteService()
         // Verifico si el nombre del satélite existe en la lista de satélites registrados y si es así traerlo a la fun:
-        val satelliteData = listSatellite.find { it.name == satellite_name.lowercase() }
+        val satelliteData = satelliteService.listSatellite.find { it.name == satellite_name.lowercase() }
             ?: return ResponseEntity.badRequest().body("Satellite ${satellite_name.lowercase()} not found.") // if null return ...
 
         // Actualizar la distancia y el mensaje del satélite con los valores recibidos
@@ -116,7 +109,8 @@ class TopSecretController {
      */
     @GetMapping("/topsecret_split/{satellite_name}")
     fun getSplitSatellite(@PathVariable satellite_name: String): ResponseEntity<Any> {
-        val satellite = listSatellite.find { it.name == satellite_name.lowercase() }
+        satelliteService = SatelliteService()
+        val satellite = satelliteService.listSatellite.find { it.name == satellite_name.lowercase() }
         return if (satellite != null) {
             val (x, y) = satellite.findPosition()
             val messegeIsEmpty = (satellite.message.find { it == "" })

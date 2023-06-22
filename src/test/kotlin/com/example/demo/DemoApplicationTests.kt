@@ -17,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @see org.springframework.test.context.junit.jupiter.SpringExtension
  */
 @ExtendWith(SpringExtension::class)
-@SpringBootTest(classes = [apiRest.RunApplication::class])
+@SpringBootTest(classes = [apiRest.controller.RunApplication::class])
 class DemoApplicationTests {
 
 	/**
