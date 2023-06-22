@@ -1,4 +1,4 @@
-package main
+package apiRest
 
 import apiRest.RunApplication
 import org.springframework.boot.runApplication

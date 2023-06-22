@@ -1,4 +1,4 @@
-package dataClases
+package apiRest.model.dataClases
 
 /**
  * Clase que representa la respuesta del servicio Top Secret.

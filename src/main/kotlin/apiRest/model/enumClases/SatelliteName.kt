@@ -1,4 +1,4 @@
-package enumClases
+package apiRest.model.enumClases
 
 /**
  * Enumeración que contiene los nombres posibles de los satélites.

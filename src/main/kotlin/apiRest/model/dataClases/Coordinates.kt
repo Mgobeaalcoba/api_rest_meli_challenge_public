@@ -1,4 +1,4 @@
-package dataClases
+package apiRest.model.dataClases
 
 /**
  * Clase que modela las coordenadas de un punto geográfico.
