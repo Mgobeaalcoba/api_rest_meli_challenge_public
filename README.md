@@ -1,5 +1,9 @@
 # API REST Meli Challenge Kotlin
 
+## Presentación del Producto: 
+
+<div style="position: relative; padding-top: 56.25%; overflow: hidden"><iframe allowfullscreen src="https://decktop.us/arF3hV1q9?embedded=true" style="position: absolute; top: 0; left: 0; width: 100%; height:100%; border:none"></iframe></div>
+
 Este proyecto es una API REST construida con Spring Boot en el lenguaje de programación Kotlin. La API se encarga de recibir y procesar información de satélites para determinar la posición y mensaje de una nave enemiga. Para ello usa el método de la trilateración. En este figma pueden encontrar una explicación visual amigable y sencilla sobre este método:
 
 [Trilateración: explicación visual en Figma](https://www.figma.com/file/XUbwl0hIkeKKW8CoYC2YG4/Trilateraci%C3%B3n---Meli-Challenge?node-id=0%3A1&t=iNjGkFVJT2QrVGFA-1)
