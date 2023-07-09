@@ -26,6 +26,12 @@ import apiRest.model.dataClases.Satellite
 import apiRest.model.dataClases.TopSecretRequest
 import apiRest.model.dataClases.TopSecretResponse
 import apiRest.service.SatelliteService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -45,6 +51,7 @@ class RunApplication
  */
 @RestController
 @RequestMapping("/")
+@Tag(name = "Top Secret API", description = "Endpoints for retrieving location and message from satellites")
 class TopSecretController {
 
     private lateinit var satelliteService: SatelliteService
@@ -56,6 +63,15 @@ class TopSecretController {
      * @return [ResponseEntity] object containing the location and message of the unknown object or an error message if not enough information was received.
      */
     @PostMapping("/topsecret")
+    @Operation(summary = "Get location and message", description = "Get the location and message from all satellites")
+    @ApiResponse(
+        responseCode = "200",
+        description = "Location and message obtained",
+        content = [
+            Content(mediaType = "application/json", schema = Schema(implementation = TopSecretResponse::class))
+        ]
+    )
+    @ApiResponse(responseCode = "404", description = "Location and message not found")
     fun processTopSecret(@RequestBody request: TopSecretRequest): ResponseEntity<Any> {
         satelliteService = SatelliteService()
         val (x: Double?, y: Double?) = satelliteService.getLocation(request.satellites)
@@ -86,6 +102,9 @@ class TopSecretController {
      * @return A ResponseEntity object containing a success message if the satellite was updated, or a 400 Bad Request error if the satellite was not found.
      */
     @PostMapping("/topsecret_split/{satellite_name}")
+    @Operation(summary = "Update satellite data", description = "Update information for a specific satellite")
+    @ApiResponse(responseCode = "200", description = "Satellite data updated")
+    @ApiResponse(responseCode = "400", description = "Satellite not found")
     fun postSplitSatellite(@PathVariable satellite_name: String, @RequestBody body: Map<String, Any>): ResponseEntity<Any> {
         satelliteService = SatelliteService()
         // Verifico si el nombre del satélite existe en la lista de satélites registrados y si es así traerlo a la fun:
@@ -107,6 +126,15 @@ class TopSecretController {
      * @return a ResponseEntity object with the unknown object information and the full message, or an error message if there is not enough information.
      */
     @GetMapping("/topsecret_split/{satellite_name}")
+    @Operation(summary = "Get satellite information", description = "Get information for an individual satellite")
+    @ApiResponse(
+        responseCode = "200",
+        description = "Satellite information obtained",
+        content = [
+            Content(mediaType = "application/json", schema = Schema(implementation = TopSecretResponse::class))
+        ]
+    )
+    @ApiResponse(responseCode = "404", description = "Satellite not found")
     fun getSplitSatellite(@PathVariable satellite_name: String): ResponseEntity<Any> {
         satelliteService = SatelliteService()
         val satellite = satelliteService.listSatellite.find { it.name == satellite_name.lowercase() }
