@@ -9,6 +9,7 @@ import java.util.*
  * @property distance The distance from the satellite to the source of the message.
  * @property message The message received by the satellite.
  */
+
 data class Satellite(
     var name: String,
     var distance: Double?,
