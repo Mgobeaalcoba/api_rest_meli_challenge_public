@@ -94,19 +94,101 @@ Si la información de los satélites no es suficiente para determinar la posici�
 - El método `postSplitSatellite()` de la clase `TopSecretController` registra la distancia y el fragmento del mensaje secreto de un satélite específico. Si el satélite no está registrado, devuelve un mensaje de error.
 - El método `getSplitSatellite()` de la clase `TopSecretController` devuelve la ubicación y el fragmento del mensaje secreto de un satélite específico. Si el satélite no está registrado, devuelve un mensaje de error. Si no se proporcionan suficientes fragmentos de mensaje, devuelve un mensaje de error.
 
-## Documentación interactiva (***NEW***):
+## Otras consideraciones:
 
-Al descargar el proyecto y encender el servidor podrán encontrar la documentación intereactiva del mismo en el siguiente dominio: 
+El challenge estaba dividido en **3 niveles.** Su resolución también fue por niveles y se puede acceder a cada uno de ellos haciendo **checkout entre las ramas del repositorio:**
+
+- **"Main"** es la rama del nivel 3.
+- **"Nivel 2"** es la rama del nivel 2.
+- Para el nivel 1 hay doy ramas: **"Nivel1"** que es la primera solución (sin clases y objetos) y una segunda versión **"Nivel1_with_class"** que es la misma solución pero con una arquitectura mas compleja que involucra clases y data clases.
+
+Finalmente pueden encontrar la consigna que se debía cumplir en este Meli Challenge Kotlin en el archivo en la carpeta raiz del repo llamado: **"Consgina Challenge - Operacion Fuego de Quasar v1.1 KOTLIN.pdf"**
+
+## Ejemplos de cURL para importar en Postman, Thunder Client o cualquier otro software de cliente:
+
+### POST /topsecret
+
+```json
+curl --location 'http://35.202.30.49:8080/topsecret' \
+--header 'Content-Type: application/json' \
+--data '{
+"satellites": [
+{
+"name": "kenobi",
+"distance": 100,
+"message": ["", "", "un", "mensaje", ""] },
+{
+"name": "skywalker",
+"distance": 215.5,
+"message": ["", "es", "", "", "secreto"] },
+{
+"name": "sato",
+"distance": 342.7,
+"message": ["este", "", "un", "", ""] }
+]
+}'
+```
+
+### POST /topsecret_split/{satellite_name}
+
+```json
+curl --location 'http://35.202.30.49:8080/topsecret_split/keno' \
+--header 'Content-Type: application/json' \
+--data '{
+"distance": 557.0,
+"message": ["Este es", "un mensaje","para" , "probar", "si funciona"]
+}'
+```
+
+### GET /topsecret_split
+
+```json
+curl --location 'http://35.202.30.49:8080/topsecret_split/sato'
+```
+
+## Extra:
+
+Podes obtener estas request y otras tres que forman parte de una misma colection de testeo de los endpoints en http://localhost:8080 descargando el el siguiente .JSON de este repo:
+
+**API-REST Meli Challenge.postman_collection.json**
+
+Una vez descargado lo importan en Postman y listo!
+
+Importante: para probarlo en local host primero vas a tener que clonar el repositorio actual en tu PC
+
+```bash
+git clone https://github.com/Mgobeaalcoba/api_rest_meli_challenge_public.git
+```
+
+luego ubicarte en el directorio clonado y compilarlo con el siguiente comando:
+
+```bash
+./gradlew build
+```
+
+Una vez compilado, se debe ejecutar el archivo .jar generado por la compilación con el siguiente comando:
+
+```bash
+java -jar build/libs/{mi-programa}.jar
+```
+
+Hay que reemplazar {mi-programa} por el nombre que el compilador le haya puesto en tu PC.
+
+Hecho esto tendrás el servidor levantado en localhost y podrás probarlo también allí.
+
+## Documentación interactiva (**_NEW_**):
+
+Al descargar el proyecto y encender el servidor podrán encontrar la documentación intereactiva del mismo en el siguiente dominio:
 
 - http://localhost:8080/swagger-ui/index.html#/
 
 <img src="./images/interactive_documentation_open_api.png">
 
-Desde allí no solo podrán entender la función del controlador y de cada uno de sus endpoints sino que también podrán probarlos desde allí mismo. 
+Desde allí no solo podrán entender la función del controlador y de cada uno de sus endpoints sino que también podrán probarlos desde allí mismo.
 
 También podrán encontrar la misma documentación accediendo desde el server en linea.
 
------------
+---
 
 ## Autor
 
@@ -118,4 +200,4 @@ LinkedIn: [Mariano Gobea Alcoba](https://www.linkedin.com/in/mariano-gobea-alcob
 
 GitHub: [Mgobeaalcoba](https://github.com/Mgobeaalcoba)
 
------
+---
