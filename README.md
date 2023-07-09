@@ -94,6 +94,18 @@ Si la información de los satélites no es suficiente para determinar la posici�
 - El método `postSplitSatellite()` de la clase `TopSecretController` registra la distancia y el fragmento del mensaje secreto de un satélite específico. Si el satélite no está registrado, devuelve un mensaje de error.
 - El método `getSplitSatellite()` de la clase `TopSecretController` devuelve la ubicación y el fragmento del mensaje secreto de un satélite específico. Si el satélite no está registrado, devuelve un mensaje de error. Si no se proporcionan suficientes fragmentos de mensaje, devuelve un mensaje de error.
 
+## Documentación interactiva (***NEW***):
+
+Al descargar el proyecto y encender el servidor podrán encontrar la documentación intereactiva del mismo en el siguiente dominio: 
+
+- http://localhost:8080/swagger-ui/index.html#/
+
+<img src="./images/interactive_documentation_open_api.png">
+
+Desde allí no solo podrán entender la función del controlador y de cada uno de sus endpoints sino que también podrán probarlos desde allí mismo. 
+
+También podrán encontrar la misma documentación accediendo desde el server en linea.
+
 -----------
 
 ## Autor
