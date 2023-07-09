@@ -186,7 +186,9 @@ Al descargar el proyecto y encender el servidor podrán encontrar la documentaci
 
 Desde allí no solo podrán entender la función del controlador y de cada uno de sus endpoints sino que también podrán probarlos desde allí mismo.
 
-También podrán encontrar la misma documentación accediendo desde el server en linea.
+También podrán encontrar la misma documentación accediendo desde el server en linea al siguiente dominio: 
+
+- http://35.202.30.49:8080/swagger-ui/index.html#/
 
 ---
 
