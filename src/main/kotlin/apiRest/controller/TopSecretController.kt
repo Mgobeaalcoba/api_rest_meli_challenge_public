@@ -28,9 +28,10 @@ import apiRest.model.dataClases.TopSecretResponse
 import apiRest.service.SatelliteService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.ExampleObject
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
-import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.parameters.RequestBody
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.http.HttpStatus
@@ -64,6 +65,15 @@ class TopSecretController {
      */
     @PostMapping("/topsecret")
     @Operation(summary = "Get location and message", description = "Get the location and message from all satellites")
+    @RequestBody(
+        content = [
+            Content(
+                mediaType = "application/json",
+                schema = Schema(implementation = TopSecretRequest::class),
+                examples = [ExampleObject(value = EXAMPLE_REQUEST_BODY)]
+            )
+        ]
+    )
     @ApiResponse(
         responseCode = "200",
         description = "Location and message obtained",
@@ -72,7 +82,9 @@ class TopSecretController {
         ]
     )
     @ApiResponse(responseCode = "404", description = "Location and message not found")
-    fun processTopSecret(@RequestBody request: TopSecretRequest): ResponseEntity<Any> {
+    fun processTopSecret(
+        @RequestBody request: TopSecretRequest
+    ): ResponseEntity<Any> {
         satelliteService = SatelliteService()
         val (x: Double?, y: Double?) = satelliteService.getLocation(request.satellites)
         val message = satelliteService.getMessage(request.satellites)
@@ -158,5 +170,29 @@ class TopSecretController {
             val response = mapOf("message" to "RESPONSE CODE: ${HttpStatus.NOT_FOUND.value()}")
             ResponseEntity.status(HttpStatus.NOT_FOUND).body(response)
         }
+    }
+
+    companion object {
+        private const val EXAMPLE_REQUEST_BODY = """
+            {
+              "satellites": [
+                {
+                  "name": "kenobi",
+                  "distance": 150.0,
+                  "message": ["", "este", "es", "un", "mensaje"]
+                },
+                {
+                  "name": "skywalker",
+                  "distance": 238.0,
+                  "message": ["Hola", "este", "", "un", ""]
+                },
+                {
+                  "name": "sato",
+                  "distance": 176.0,
+                  "message": ["", "", "es", "un", "mensaje"]
+                }
+              ]
+            }
+        """
     }
 }
